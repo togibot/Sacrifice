@@ -2,7 +2,11 @@ name: Render SACRIFICE
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   render:
@@ -27,3 +31,4 @@ jobs:
         with:
           name: SACRIFICE-audio
           path: output/
+          if-no-files-found: error
