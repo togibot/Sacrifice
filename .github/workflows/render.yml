@@ -1,0 +1,29 @@
+name: Render SACRIFICE
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Render audio
+        run: python generate.py
+
+      - name: Upload audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: SACRIFICE-audio
+          path: output/
